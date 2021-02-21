@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./AddRecipeTitle.css";
 
+// services
+import { postOneRecipe } from "../../ApiServices/ApiClientService";
+
 const AddRecipeTitle = () => {
   const [ingredients, setIngredients] = useState([]);
   const [title, setTitle] = useState("");
@@ -8,7 +11,8 @@ const AddRecipeTitle = () => {
   const saveIngredients = (e) => {
     const ingredients = e.target.value
       .match(/\b[\w]+\b/g)
-      .filter((el) => /[^\s]/.test(el));
+      .filter((el) => /[^\s]/.test(el))
+      .join(",");
     setIngredients(ingredients);
   };
 
@@ -36,6 +40,10 @@ const AddRecipeTitle = () => {
 
   const submitRecipe = (e) => {
     e.preventDefault();
+    console.log("hello");
+    postOneRecipe({ title, ingredients })
+      .then((res) => res.data)
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -43,7 +51,7 @@ const AddRecipeTitle = () => {
       <div className="h1_wrapper">
         <h1>Hey, here you'll add the recipes!</h1>
       </div>
-      <form className="form_recipe">
+      <form className="form_recipe" onSubmit={(e) => submitRecipe(e)}>
         <label htmlFor="recipe_title">What is the title of your recipe?</label>
         <input
           type="text"
@@ -63,9 +71,7 @@ const AddRecipeTitle = () => {
           cols="30"
           rows="30"
         ></textarea>
-        <button type="submit" onSubmit={(e) => submitRecipe(e)}>
-          That's it!
-        </button>
+        <button type="submit">That's it!</button>
       </form>
     </div>
   );
