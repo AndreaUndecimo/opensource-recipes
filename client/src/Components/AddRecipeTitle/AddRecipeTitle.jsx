@@ -3,9 +3,12 @@ import "./AddRecipeTitle.css";
 
 const AddRecipeTitle = () => {
   const [ingredients, setIngredients] = useState([]);
+  const [title, setTitle] = useState("");
 
   const saveIngredients = (e) => {
-    const ingredients = e.target.value.match(/\b[\w]+\b/g);
+    const ingredients = e.target.value
+      .match(/\b[\w]+\b/g)
+      .filter((el) => /[^\s]/.test(el));
     setIngredients(ingredients);
   };
 
@@ -31,6 +34,10 @@ const AddRecipeTitle = () => {
     }
   };
 
+  const submitRecipe = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="add_recipes_wrapper">
       <div className="h1_wrapper">
@@ -43,6 +50,7 @@ const AddRecipeTitle = () => {
           name="Recipe Title"
           id="recipe_title"
           placeholder="Enter the title here"
+          onChange={(e) => setTitle(e.target.value)}
         />
         <label htmlFor="ingredients">What ingredients do we need?</label>
         <textarea
@@ -55,6 +63,9 @@ const AddRecipeTitle = () => {
           cols="30"
           rows="30"
         ></textarea>
+        <button type="submit" onSubmit={(e) => submitRecipe(e)}>
+          That's it!
+        </button>
       </form>
     </div>
   );
