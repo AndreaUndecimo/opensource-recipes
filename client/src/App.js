@@ -1,6 +1,6 @@
-import LandingPage from "./LandingPage/LandingPage";
+import LandingPage from "./Components/LandingPage/LandingPage";
 import { Router } from "@reach/router";
-import AddRecipeTitle from "./AddRecipeTitle/AddRecipeTitle";
+import AddRecipeTitle from "./Components/AddRecipeTitle/AddRecipeTitle";
 
 function App() {
   return (
