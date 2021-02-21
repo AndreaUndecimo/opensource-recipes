@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddRecipeTitle.css";
 
 const AddRecipeTitle = () => {
-  const handleTextArea = () => {
+  const [ingredients, setIngredients] = useState([]);
+
+  const saveIngredients = (e) => {
+    const ingredients = e.target.value.match(/\b[\w]+\b/g);
+    setIngredients(ingredients);
+  };
+
+  const focusTextArea = () => {
     if (document.getElementById("ingredients").value === "") {
       document.getElementById("ingredients").value += "• ";
     }
@@ -10,12 +17,17 @@ const AddRecipeTitle = () => {
 
   const addBullet = (e) => {
     let keycode = e.keyCode ? e.keyCode : e.which;
-    if (keycode === "13") document.getElementById("ingredients").value += "• ";
+
+    if (keycode === 13) {
+      document.getElementById("ingredients").value += "• ";
+    }
 
     var txtval = document.getElementById("ingredients").value;
-
-    if (/\n/.test(txtval.substr(txtval.length - 1))) {
-      document.getElementById("ingredients").value += "• ";
+    if (/\n+/.test(txtval.substr(txtval.length - 1))) {
+      document.getElementById("ingredients").value = txtval.substring(
+        0,
+        txtval.length - 1
+      );
     }
   };
 
@@ -35,25 +47,14 @@ const AddRecipeTitle = () => {
         <label htmlFor="ingredients">What ingredients do we need?</label>
         <textarea
           onKeyUp={(e) => addBullet(e)}
-          onFocus={handleTextArea}
+          onFocus={focusTextArea}
+          onChange={(e) => saveIngredients(e)}
           className="ingredients"
           name="Ingredients"
           id="ingredients"
           cols="30"
           rows="30"
         ></textarea>
-        {/* <div className="recipe_ingredients">
-          <div className="editable_content">
-            <button
-              onClick={(e) => toggleBullet(e)}
-              type="button"
-              className="add_btn"
-            >
-              <PlusIcon />
-            </button>
-            <div contentEditable="true" className="content_recipe"></div>
-          </div>
-        </div> */}
       </form>
     </div>
   );
