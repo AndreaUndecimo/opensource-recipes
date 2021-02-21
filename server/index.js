@@ -1,40 +1,17 @@
-const sqlite3 = require('sqlite3').verbose();
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
+const app = express();
 
-const {PrismaClient} = require('@prisma/client');
+dotenv.config();
 
-const prisma = new PrismaClient(); // * Instantiate Prisma Client
+const PORT = process.env.PORT || 3700;
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// * Body of function where the queries to db will be sent
-async function queries () {
-  await prisma.recipe.create({
-    data: {
-      title: 'Lasagne',
-      ingredients: 'Ragu, Sugo, pasta, parmigiano',
-      steps: 'cook, eat',
-      author: {
-        create: {
-          name: 'Andrea',
-          email: 'andrea@chef.com'
-        }
-      },
-      authorId: 1
-    }
-  });
-
-  const newRecipe = await prisma.recipe.update({
-    where: {id: 1},
-    data: {title: 'Fettuccine'},
-  })
-
-
-  console.log(newRecipe)
-} 
-
-queries()
-  .catch(error => {
-    throw error
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  })
+app.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`);
+});
