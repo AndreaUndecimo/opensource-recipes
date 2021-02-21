@@ -15,12 +15,6 @@ model Recipe {
   title String
   ingredients String
   background String?
-  author    User?     @relation(fields: [authorId], references: [id])
-  authorId  Int? @unique
-}
-
-model User {
-  id     Int     @default(autoincrement()) @id
-  name String
-  email String
+  name String?
+  email String?
 }
