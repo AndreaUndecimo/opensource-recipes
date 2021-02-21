@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import "./AddRecipeTitle.css";
 
-//Icons
-import { ReactComponent as PlusIcon } from "../assets/plus_icon.svg";
-import { GrRestaurant } from "react-icons/gr";
-
 const AddRecipeTitle = () => {
-  const [clicked, setClicked] = useState(false);
+  const handleTextArea = () => {
+    if (document.getElementById("ingredients").value === "") {
+      document.getElementById("ingredients").value += "• ";
+    }
+  };
 
-  const toggleBullet = (e) => {
-    setClicked(!clicked);
+  const addBullet = (e) => {
+    let keycode = e.keyCode ? e.keyCode : e.which;
+    if (keycode === "13") document.getElementById("ingredients").value += "• ";
+
+    var txtval = document.getElementById("ingredients").value;
+
+    if (/\n/.test(txtval.substr(txtval.length - 1))) {
+      document.getElementById("ingredients").value += "• ";
+    }
   };
 
   return (
@@ -25,8 +32,17 @@ const AddRecipeTitle = () => {
           id="recipe_title"
           placeholder="Enter the title here"
         />
-        <label htmlFor="recipe_ingredients">What ingredients do we need?</label>
-        <div className="recipe_ingredients">
+        <label htmlFor="ingredients">What ingredients do we need?</label>
+        <textarea
+          onKeyUp={(e) => addBullet(e)}
+          onFocus={handleTextArea}
+          className="ingredients"
+          name="Ingredients"
+          id="ingredients"
+          cols="30"
+          rows="30"
+        ></textarea>
+        {/* <div className="recipe_ingredients">
           <div className="editable_content">
             <button
               onClick={(e) => toggleBullet(e)}
@@ -37,21 +53,7 @@ const AddRecipeTitle = () => {
             </button>
             <div contentEditable="true" className="content_recipe"></div>
           </div>
-          {/* {!clicked ? (
-            <button
-              onClick={(e) => toggleBullet(e)}
-              type="button"
-              className="add_btn"
-            >
-              <PlusIcon />
-            </button>
-          ) : (
-            <div className="edited_content">
-              <GrRestaurant />
-              <div contentEditable="true" className="content_recipe"></div>
-            </div>
-          )} */}
-        </div>
+        </div> */}
       </form>
     </div>
   );

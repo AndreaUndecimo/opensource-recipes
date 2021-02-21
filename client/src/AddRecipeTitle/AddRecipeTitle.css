@@ -29,49 +29,8 @@
   margin-bottom: 20px;
 }
 
-.recipe_ingredients {
-  min-height: 50vh;
-  width: 100%;
-  border: 1px solid #000000;
-  padding: 10px 20px;
-}
-
-.recipe_ingredients button {
-  border-radius: 50%;
+.form_recipe textarea {
+  resize: none;
   border: 1px solid black;
-  width: 16px;
-  height: 16px;
-  position: relative;
-}
-
-.recipe_ingredients button:hover {
-  background-color: #f5efff;
-}
-
-.recipe_ingredients svg {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%);
-}
-
-.editable_content {
-  display: flex;
-  align-items: center;
-}
-
-.recipe_text {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.content_recipe {
-  margin-left: 10px;
-  min-width: 75%;
-  padding-top: 4px;
-}
-
-.ingredients_list {
-  display: flex;
-  flex-direction: column;
+  padding: 10px 20px;
 }
