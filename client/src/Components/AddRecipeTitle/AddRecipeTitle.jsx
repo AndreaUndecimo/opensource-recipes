@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./AddRecipeTitle.css";
 
 // services
 import { postOneRecipe } from "../../ApiServices/ApiClientService";
+import { StateContext } from "../../globals/globalStore.reducer";
+import { validateRecipeTitle } from "../../helpers/validation.helper";
+import { navigate } from "@reach/router";
 
 const AddRecipeTitle = () => {
+  const { state, dispatch } = useContext(StateContext);
   const [ingredients, setIngredients] = useState([]);
   const [title, setTitle] = useState("");
 
   const saveIngredients = (e) => {
-    const ingredients = e.target.value
-      .match(/\b[\w]+\b/g)
-      .filter((el) => /[^\s]/.test(el))
-      .join(",");
-    setIngredients(ingredients);
+    let newIngredients;
+
+    if (e.target.value.match(/\b[\w]+\b/g)) {
+      newIngredients = e.target.value
+        .match(/\b[\w]+\b/g)
+        .filter((el) => /[^\s]/.test(el))
+        .join(",");
+    }
+    setIngredients(newIngredients);
   };
 
   const focusTextArea = () => {
@@ -40,10 +48,12 @@ const AddRecipeTitle = () => {
 
   const submitRecipe = (e) => {
     e.preventDefault();
-    console.log("hello");
-    postOneRecipe({ title, ingredients })
-      .then((res) => res.data)
-      .catch((error) => console.error(error));
+    dispatch({ type: "title", payload: title });
+    dispatch({ type: "ingredients", payload: ingredients });
+    navigate("/add_steps");
+    // postOneRecipe({ title, ingredients })
+    //   .then((res) => res.data)
+    //   .catch((error) => console.error(error));
   };
 
   return (
@@ -54,6 +64,7 @@ const AddRecipeTitle = () => {
       <form className="form_recipe" onSubmit={(e) => submitRecipe(e)}>
         <label htmlFor="recipe_title">What is the title of your recipe?</label>
         <input
+          required={true}
           type="text"
           name="Recipe Title"
           id="recipe_title"
@@ -62,6 +73,7 @@ const AddRecipeTitle = () => {
         />
         <label htmlFor="ingredients">What ingredients do we need?</label>
         <textarea
+          required={true}
           onKeyUp={(e) => addBullet(e)}
           onFocus={focusTextArea}
           onChange={(e) => saveIngredients(e)}
@@ -71,7 +83,12 @@ const AddRecipeTitle = () => {
           cols="30"
           rows="30"
         ></textarea>
-        <button type="submit">That's it!</button>
+        <button
+          type="submit"
+          disabled={validateRecipeTitle(title, ingredients)}
+        >
+          That's it!
+        </button>
       </form>
     </div>
   );
