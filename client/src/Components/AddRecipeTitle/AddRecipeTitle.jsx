@@ -2,13 +2,12 @@ import React, { useContext, useState } from "react";
 import "./AddRecipeTitle.css";
 
 // services
-import { postOneRecipe } from "../../ApiServices/ApiClientService";
 import { StateContext } from "../../globals/globalStore.reducer";
 import { validateRecipeTitle } from "../../helpers/validation.helper";
 import { navigate } from "@reach/router";
 
 const AddRecipeTitle = () => {
-  const { state, dispatch } = useContext(StateContext);
+  const { dispatch } = useContext(StateContext);
   const [ingredients, setIngredients] = useState([]);
   const [title, setTitle] = useState("");
 
