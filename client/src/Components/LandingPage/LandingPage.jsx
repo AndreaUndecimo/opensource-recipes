@@ -7,7 +7,7 @@ const LandingPage = () => {
     <div className="landing_wrapper">
       <div className="title_wrapper">
         <h1>
-          Welcome to the first open-source, editable recibe book on the
+          Welcome to the first open-source, editable recipe book on the
           Internet!{" "}
         </h1>
       </div>
