@@ -3,36 +3,32 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function createRecipe(req, res) {
-  const { title, ingredients, authorId, authorName, authorEmail } = req.body;
+  const { title, ingredients, background, name, email } = req.body;
 
   try {
-    const newRecipe = await prisma.create({
+    const newRecipe = await prisma.recipe.create({
       data: {
         title,
         ingredients,
-        authorId,
-        author: { connect: { email: authorEmail, name: authorName } },
+        background,
+        name,
+        email,
       },
     });
 
     res.status(200).send(newRecipe);
   } catch (error) {
-    console.error(error);
+    res.status(400).send(error);
   }
 }
 
-async function main() {
-  createRecipe();
+async function getAllRecipes(_, res) {
+  try {
+    const allRecipes = await prisma.recipe.findMany();
+    res.status(200).send(allRecipes);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 }
 
-main()
-  .catch((e) => {
-    throw e;
-  })
-
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
-
-
-  module.exports = 
+module.exports = { createRecipe, getAllRecipes };
