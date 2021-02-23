@@ -1,13 +1,18 @@
 import axios from "axios";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 export async function postOneRecipe({ title, ingredients, name, email }) {
-  return axios.post(`${process.env.BE_URL}/recipe/new_recipe`, {
+  return axios.post(`http://localhost:3800/recipe/new_recipe`, {
     title,
     ingredients,
     name,
     email,
+  });
+}
+
+export async function postImageToCloudinary(base64EncodedImage) {
+  await fetch("http://localhost:3800/cloudinary/upload_image", {
+    method: "POST",
+    body: JSON.stringify({ data: base64EncodedImage }),
+    headers: { "Content-Type": "application/json" },
   });
 }
