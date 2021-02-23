@@ -19,4 +19,5 @@ model Recipe {
   background String?
   name String?
   email String?
+  imageIds String?
 }
