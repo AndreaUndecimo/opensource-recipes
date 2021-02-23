@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import dotenv from "dotenv";
 
 import "./AddPictures.css";
+import { postImageToCloudinary } from "../../ApiServices/ApiClientService";
 
 dotenv.config();
 
@@ -45,12 +46,7 @@ const AddPictures = () => {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      console.log(base64EncodedImage);
-      // await fetch("/api/upload", {
-      //   method: "POST",
-      //   body: JSON.stringify({ data: base64EncodedImage }),
-      //   headers: { "Content-Type": "application/json" },
-      // });
+      await postImageToCloudinary(base64EncodedImage);
       setFileInputState("");
       setPreviewSource("");
       setSuccessMsg("Image uploaded successfully");
