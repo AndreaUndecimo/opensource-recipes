@@ -10,7 +10,7 @@ const AddBackgroundStory = () => {
   const submitStory = (e) => {
     e.preventDefault();
     dispatch({ type: "story", payload: story });
-    navigate("/add_background");
+    navigate("/add_images");
   };
 
   return (
@@ -29,7 +29,9 @@ const AddBackgroundStory = () => {
           rows="30"
         ></textarea>
         <button type="submit">That's it!</button>
-        <button>Skip</button>
+        <button onClick={() => navigate("/add_images")} type="button">
+          Skip
+        </button>
       </form>
     </div>
   );
