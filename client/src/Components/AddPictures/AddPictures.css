@@ -37,3 +37,49 @@ button.btn {
   background-color: rgba(245, 47, 87, 0.8);
   font-weight: 600;
 }
+
+.extra_files {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.extra_files + label {
+  margin: 10px 0;
+  font-size: 1.25em;
+  font-weight: 700;
+  display: inline-block;
+  width: 40%;
+  padding-bottom: 20%;
+  cursor: pointer;
+  align-self: center;
+  justify-self: center;
+  padding: 10px;
+}
+
+.extra_files:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+  background-color: #ffdb58;
+}
+.extra_files + label:hover {
+  background-color: #ffdb58;
+}
+
+.image_grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.pics {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

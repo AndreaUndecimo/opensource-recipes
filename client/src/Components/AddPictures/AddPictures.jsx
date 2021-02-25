@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-// import Dropzone from "react-dropzone";
-// import request from "superagent";
+import { ReactComponent as PlusSign } from "../../assets/plus.svg";
 import dotenv from "dotenv";
 
 import "./AddPictures.css";
@@ -24,11 +23,12 @@ const AddPictures = () => {
     reader.onloadend = () => {
       setSelectedFile([...selectedFile, reader.result]);
     };
-    setFileInputState(e.target.value);
+    // setFileInputState(e.target.value);
   };
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
+    console.log("hey");
     if (!selectedFile) return;
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
@@ -58,14 +58,31 @@ const AddPictures = () => {
         <h1>Upload an Image</h1>
       </div>
       <form className="form_images" onSubmit={handleSubmitFile}>
-        {(selectedFile && selectedFile.length) < 4 &&
-          selectedFile.map((fileSrc) => (
+        <ul className="image_grid">
+          {selectedFile &&
+            selectedFile.length <= 4 &&
+            selectedFile.map((fileSrc) => (
+              <li className="pics">
+                <img src={fileSrc} alt="chosen" style={{ height: "250px" }} />
+              </li>
+            ))}
+          {selectedFile.length < 4 && (
             <>
-              <img src={fileSrc} alt="chosen" style={{ height: "250px" }} />
-              <input type="file" onChange={handleFileInputChange} />
+              <input
+                type="file"
+                onChange={handleFileInputChange}
+                name="extra_files"
+                id="extra_files"
+                className="extra_files"
+                multiple={true}
+              />
+              <label htmlFor="extra_files">
+                <PlusSign />
+              </label>
             </>
-          ))}
-        <input
+          )}
+        </ul>
+        {/* <input
           id="fileInput"
           type="file"
           name="image"
@@ -73,7 +90,8 @@ const AddPictures = () => {
           value={fileInputState}
           className="form-input"
           disabled={selectedFile.length >= 4}
-        />
+          multiple={true}
+        /> */}
         <button className="btn" type="submit">
           Submit
         </button>
