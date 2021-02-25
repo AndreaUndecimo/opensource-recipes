@@ -29,17 +29,17 @@ function reducer(state, action) {
     case "backgroundStory":
       return {
         ...state,
-        backgroundStory: action.payload,
+        backgroundStory: action.payload || null,
       };
     case "username":
       return {
         ...state,
-        username: action.payload,
+        username: action.payload || null,
       };
     case "email":
       return {
         ...state,
-        email: action.payload,
+        email: action.payload || null,
       };
     default:
       throw new Error();
