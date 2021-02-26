@@ -7,6 +7,7 @@ const initialState = {
   backgroundStory: null,
   username: null,
   email: null,
+  recipe: null,
 };
 
 function reducer(state, action) {
@@ -40,6 +41,11 @@ function reducer(state, action) {
       return {
         ...state,
         email: action.payload || null,
+      };
+    case "recipe":
+      return {
+        ...state,
+        recipe: action.payload,
       };
     default:
       throw new Error();
