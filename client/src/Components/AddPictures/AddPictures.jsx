@@ -23,27 +23,23 @@ const AddPictures = () => {
     reader.onloadend = () => {
       setSelectedFile([...selectedFile, reader.result]);
     };
-    // setFileInputState(e.target.value);
-  };
-
-  const handleSubmitFile = (e) => {
-    e.preventDefault();
-    console.log("hey");
-    if (!selectedFile) return;
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-    reader.onloadend = () => {
-      uploadImage({ base64EncodedImage: reader.result, title: state.title });
-    };
     reader.onerror = () => {
       console.error("AHHHHHHHH!!");
       setErrMsg("something went wrong!");
     };
   };
 
-  const uploadImage = async ({ base64EncodedImage, title }) => {
+  const handleSubmitFile = (e) => {
+    e.preventDefault();
+    if (selectedFile.length === 0) return;
+    selectedFile.forEach((fileUrl) =>
+      uploadImage({ base64EncodedImage: fileUrl, recipe: state.recipe })
+    );
+  };
+
+  const uploadImage = async ({ base64EncodedImage, recipe }) => {
     try {
-      await postImageToCloudinary({ base64EncodedImage, title });
+      await postImageToCloudinary({ base64EncodedImage, recipe });
       setFileInputState("");
       setSuccessMsg("Image uploaded successfully");
     } catch (err) {
@@ -62,8 +58,12 @@ const AddPictures = () => {
           {selectedFile &&
             selectedFile.length <= 4 &&
             selectedFile.map((fileSrc) => (
-              <li className="pics">
-                <img src={fileSrc} alt="chosen" style={{ height: "250px" }} />
+              <li className="pics" key={fileSrc}>
+                <img
+                  src={fileSrc}
+                  alt="chosen"
+                  style={{ height: "250px", width: "100%" }}
+                />
               </li>
             ))}
           {selectedFile.length < 4 && (
@@ -82,16 +82,6 @@ const AddPictures = () => {
             </>
           )}
         </ul>
-        {/* <input
-          id="fileInput"
-          type="file"
-          name="image"
-          onChange={handleFileInputChange}
-          value={fileInputState}
-          className="form-input"
-          disabled={selectedFile.length >= 4}
-          multiple={true}
-        /> */}
         <button className="btn" type="submit">
           Submit
         </button>
