@@ -1,6 +1,5 @@
 const { cloudinary } = require("../utils/cloudinary");
 const { PrismaClient } = require("@prisma/client");
-const { connect } = require("http2");
 
 const prisma = new PrismaClient();
 
@@ -28,7 +27,6 @@ async function saveImagesToDatabase(_, res) {
   try {
     const { public_id, recipe } = await res.locals.info;
     publicIdsImages += `,${public_id}`;
-    console.log(publicIdsImages);
 
     const newPics = await prisma.recipe.update({
       where: { id: recipe.id },
@@ -48,4 +46,22 @@ async function saveImagesToDatabase(_, res) {
   }
 }
 
-module.exports = { uploadImage, saveImagesToDatabase };
+async function getAllRecipeImages(req, res) {
+  try {
+    const imageId = req.body.data;
+    console.log("imageId", imageId);
+
+    const { images } = await prisma.recipe.findUnique({
+      where: { id: imageId },
+      include: { images: true },
+    });
+
+    recipeImagesIds = images.map((image) => image.publicIds.substr(15));
+    res.status(200).send(recipeImagesIds);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send("Error");
+  }
+}
+
+module.exports = { uploadImage, saveImagesToDatabase, getAllRecipeImages };

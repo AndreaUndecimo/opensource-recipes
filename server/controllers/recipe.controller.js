@@ -3,7 +3,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function createRecipe(req, res) {
-  const { title, ingredients, background, name, email } = req.body;
+  const { title, ingredients, background, name, email, steps } = req.body;
 
   try {
     const newRecipe = await prisma.recipe.create({
@@ -13,6 +13,7 @@ async function createRecipe(req, res) {
         background,
         name,
         email,
+        steps,
       },
     });
 
@@ -24,7 +25,9 @@ async function createRecipe(req, res) {
 
 async function getAllRecipes(_, res) {
   try {
-    const allRecipes = await prisma.recipe.findMany();
+    const allRecipes = await prisma.recipe.findMany({
+      include: { images: true },
+    });
     res.status(200).send(allRecipes);
   } catch (error) {
     res.status(400).send(error);
