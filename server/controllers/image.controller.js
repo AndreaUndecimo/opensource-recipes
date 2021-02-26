@@ -1,11 +1,14 @@
 const { cloudinary } = require("../utils/cloudinary");
 const { PrismaClient } = require("@prisma/client");
+const { connect } = require("http2");
 
 const prisma = new PrismaClient();
 
+let publicIdsImages = "";
+
 async function uploadImage(req, res, next) {
   try {
-    const { base64EncodedImage, title } = req.body.data;
+    const { base64EncodedImage, recipe } = req.body.data;
     const uploadResponse = await cloudinary.uploader.upload(
       base64EncodedImage,
       {
@@ -13,8 +16,8 @@ async function uploadImage(req, res, next) {
       }
     );
     const { public_id } = uploadResponse;
-    res.locals.public_id = { public_id, title };
-    next();
+    res.locals.info = { public_id, recipe };
+    await next();
   } catch (err) {
     console.error(err);
     res.status(500).json({ err: "Something went wrong" });
@@ -23,15 +26,23 @@ async function uploadImage(req, res, next) {
 
 async function saveImagesToDatabase(_, res) {
   try {
-    const { public_id, title } = res.locals;
-    const newPic = await prisma.picture.create();
+    const { public_id, recipe } = await res.locals.info;
+    publicIdsImages += `,${public_id}`;
+    console.log(publicIdsImages);
 
-    await prisma.recipe.update({
-      where: { title },
-      data: { imageIds: imageIds + public_id },
+    const newPics = await prisma.recipe.update({
+      where: { id: recipe.id },
+      data: {
+        images: {
+          create: {
+            publicIds: publicIdsImages,
+          },
+        },
+      },
     });
-    console.log(newPic);
-    res.status(200).send(newPic);
+
+    publicIdsImages = "";
+    res.status(200).send(newPics);
   } catch (error) {
     console.error(error);
   }
