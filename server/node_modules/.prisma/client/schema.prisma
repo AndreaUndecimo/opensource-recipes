@@ -19,11 +19,12 @@ model Recipe {
   background String?
   name String?
   email String?
-  images Picture? @relation(fields: [imageId], references: [id])
-  imageId Int?
+  images Picture[]
 }
 
 model Picture {
   id Int @default(autoincrement()) @id
   publicIds String?
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
 }
