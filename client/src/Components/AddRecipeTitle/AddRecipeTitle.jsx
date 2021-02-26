@@ -50,9 +50,6 @@ const AddRecipeTitle = () => {
     dispatch({ type: "title", payload: title });
     dispatch({ type: "ingredients", payload: ingredients });
     navigate("/add_steps");
-    // postOneRecipe({ title, ingredients })
-    //   .then((res) => res.data)
-    //   .catch((error) => console.error(error));
   };
 
   return (

@@ -13,7 +13,6 @@ const AddBackgroundStory = () => {
   const submitStory = async (e) => {
     e.preventDefault();
     try {
-      navigate("/add_images");
       const postedRecipe = await postOneRecipe({
         title,
         backgroundStory,
@@ -22,8 +21,12 @@ const AddBackgroundStory = () => {
         email,
         ingredients,
       });
+      dispatch({ type: "backgroundStory", payload: story });
       dispatch({ type: "recipe", payload: postedRecipe });
-    } catch (error) {}
+      navigate("/add_images");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -28,7 +28,9 @@ const LandingPage = () => {
           <Link to="/add_title">
             <button>Add recipe</button>
           </Link>
-          <button>Browse recipe</button>
+          <Link to="/all_recipes">
+            <button>Browse recipe</button>
+          </Link>
         </div>
       </div>
     </div>

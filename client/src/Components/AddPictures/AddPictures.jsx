@@ -5,13 +5,13 @@ import dotenv from "dotenv";
 import "./AddPictures.css";
 import { postImageToCloudinary } from "../../ApiServices/ApiClientService";
 import { StateContext } from "../../globals/globalStore.reducer";
+import Alert from "../Alert/Alert";
 
 dotenv.config();
 
 const AddPictures = () => {
   const { state } = useContext(StateContext);
 
-  const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -40,7 +40,6 @@ const AddPictures = () => {
   const uploadImage = async ({ base64EncodedImage, recipe }) => {
     try {
       await postImageToCloudinary({ base64EncodedImage, recipe });
-      setFileInputState("");
       setSuccessMsg("Image uploaded successfully");
     } catch (err) {
       console.error(err);
@@ -53,6 +52,8 @@ const AddPictures = () => {
       <div className="title">
         <h1>Upload an Image</h1>
       </div>
+      <Alert msg={errMsg} type="danger" />
+      <Alert msg={successMsg} type="success" />
       <form className="form_images" onSubmit={handleSubmitFile}>
         <ul className="image_grid">
           {selectedFile &&
