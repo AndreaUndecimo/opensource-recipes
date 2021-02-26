@@ -8,20 +8,22 @@ export async function postOneRecipe({
   email,
   steps,
 }) {
-  return axios.post(`http://localhost:3800/recipe/new_recipe`, {
-    title,
-    ingredients,
-    name: name || "",
-    backgroundStory: backgroundStory || "",
-    email: email || "",
-    steps,
-  });
+  return axios
+    .post(`http://localhost:3800/recipe/new_recipe`, {
+      title,
+      ingredients,
+      name: name || "",
+      backgroundStory: backgroundStory || "",
+      email: email || "",
+      steps,
+    })
+    .then((res) => res.data);
 }
 
-export async function postImageToCloudinary({ base64EncodedImage, title }) {
+export async function postImageToCloudinary({ base64EncodedImage, recipe }) {
   await fetch("http://localhost:3800/cloudinary/upload_image", {
     method: "POST",
-    body: JSON.stringify({ data: { base64EncodedImage, title } }),
+    body: JSON.stringify({ data: { base64EncodedImage, recipe } }),
     headers: { "Content-Type": "application/json" },
   });
 }
