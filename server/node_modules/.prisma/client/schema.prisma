@@ -16,6 +16,7 @@ model Recipe {
   id        Int      @default(autoincrement()) @id
   title String
   ingredients String
+  steps String?
   background String?
   name String?
   email String?
