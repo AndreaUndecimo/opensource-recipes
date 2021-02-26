@@ -1,0 +1,19 @@
+.all_recipes_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  align-items: center;
+}
+
+.recipe_card {
+  width: 400px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px #3333;
+  border-radius: 1rem;
+  margin: 10px 0;
+}

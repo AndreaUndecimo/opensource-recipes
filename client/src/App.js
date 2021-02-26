@@ -5,6 +5,7 @@ import { StateContext, Store } from "./globals/globalStore.reducer";
 import AddRecipeSteps from "./Components/AddRecipeSteps/AddRecipeSteps";
 import AddBackgroundStory from "./Components/AddBackgroundStory/AddBackgroundStory";
 import AddPictures from "./Components/AddPictures/AddPictures";
+import AllRecipes from "./Components/AllRecipes/AllRecipes";
 
 function App() {
   const [state, dispatch] = Store();
@@ -18,6 +19,7 @@ function App() {
           <AddRecipeSteps path="add_steps" />
           <AddBackgroundStory path="add_background" />
           <AddPictures path="add_images" />
+          <AllRecipes path="all_recipes" />
         </Router>
       </div>
     </StateContext.Provider>
