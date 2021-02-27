@@ -29,11 +29,12 @@ export async function postImageToCloudinary({ base64EncodedImage, recipe }) {
 }
 
 export async function getAllRecipeImages(id) {
-  await fetch("http://localhost:3800/cloudinary/images", {
-    method: "POST",
-    body: JSON.stringify({ data: id }),
-    headers: { "Content-Type": "application/json" },
-  });
+  return axios.post("http://localhost:3800/cloudinary/images", { id });
+  // await fetch("http://localhost:3800/cloudinary/images", {
+  //   method: "POST",
+  //   body: JSON.stringify({ data: id }),
+  //   headers: { "Content-Type": "application/json" },
+  // });
 }
 
 export async function getAllRecipes() {
