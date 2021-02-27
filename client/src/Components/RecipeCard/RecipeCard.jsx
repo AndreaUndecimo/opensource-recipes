@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Image } from "cloudinary-react";
-import { getAllRecipeImages } from "../../ApiServices/ApiClientService";
+import {
+  getAllRecipeImages,
+  getOneRecipe,
+} from "../../ApiServices/ApiClientService";
 
 const RecipeCard = (props) => {
   const [imageIds, setImageIds] = useState([]);
+  const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
     getAllRecipeImages(parseInt(props.id)).then((res) => setImageIds(res.data));
+    getOneRecipe({ id: parseInt(props.id) }).then((res) => setRecipe(res.data));
   }, []);
 
   return (
