@@ -48,15 +48,15 @@ async function saveImagesToDatabase(_, res) {
 
 async function getAllRecipeImages(req, res) {
   try {
-    const imageId = req.body.data;
-    console.log("imageId", imageId);
+    const { id } = req.body;
 
     const { images } = await prisma.recipe.findUnique({
-      where: { id: imageId },
+      where: { id },
       include: { images: true },
     });
 
-    recipeImagesIds = images.map((image) => image.publicIds.substr(15));
+    recipeImagesIds = images.map((image) => image.publicIds.substr(1));
+    console.log(recipeImagesIds);
     res.status(200).send(recipeImagesIds);
   } catch (error) {
     console.error(error);
