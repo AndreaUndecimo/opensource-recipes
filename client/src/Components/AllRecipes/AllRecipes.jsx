@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image } from "cloudinary-react";
+import { navigate } from "@reach/router";
 import { getAllRecipes } from "../../ApiServices/ApiClientService";
 
 import "./AllRecipes.css";
@@ -17,16 +17,21 @@ const AllRecipes = () => {
     <div className="all_recipes_wrapper">
       {recipes &&
         recipes.map((recipe) => (
-          <div className="recipe_card" key={recipe.id}>
+          <div
+            className="recipe_card"
+            key={recipe.id}
+            onClick={() => navigate(`/recipe/${recipe.id}`)}
+          >
             <h1>{recipe.title}</h1>
             <h1>{recipe.ingredients}</h1>
             <h1>{recipe.steps}</h1>
-            <Image
+            {/* {getAllRecipeImages(recipe.id).then((res) => console.log(res.data))} */}
+            {/* <Image
               cloudName="drf0x6usa"
               publicId="cekkedgbb8plnquf3q3z"
               width="300"
               crop="scale"
-            />
+            /> */}
             {/* {recipe &&
               recipe.images?.forEach((image, index) => (
                 <>
