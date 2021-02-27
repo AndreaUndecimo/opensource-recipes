@@ -23,28 +23,6 @@ const AllRecipes = () => {
             onClick={() => navigate(`/recipe/${recipe.id}`)}
           >
             <h1>{recipe.title}</h1>
-            <h1>{recipe.ingredients}</h1>
-            <h1>{recipe.steps}</h1>
-            {/* {getAllRecipeImages(recipe.id).then((res) => console.log(res.data))} */}
-            {/* <Image
-              cloudName="drf0x6usa"
-              publicId="cekkedgbb8plnquf3q3z"
-              width="300"
-              crop="scale"
-            /> */}
-            {/* {recipe &&
-              recipe.images?.forEach((image, index) => (
-                <>
-                  <h1>{image.publicIds.substr(15)}</h1>
-                  <Image
-                    key={index}
-                    cloudName="drf0x6usa"
-                    publicId={image.publicIds.substr(15)}
-                    width="300"
-                    crop="scale"
-                  />
-                </>
-              ))} */}
           </div>
         ))}
     </div>

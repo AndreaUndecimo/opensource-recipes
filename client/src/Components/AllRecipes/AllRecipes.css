@@ -8,12 +8,15 @@
 }
 
 .recipe_card {
-  width: 400px;
+  width: 75%;
+  min-height: 20%;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   box-shadow: 0 0 10px #3333;
   border-radius: 1rem;
   margin: 10px 0;
+  font-size: 2rem;
 }
