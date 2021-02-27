@@ -34,4 +34,16 @@ async function getAllRecipes(_, res) {
   }
 }
 
-module.exports = { createRecipe, getAllRecipes };
+async function getSingleRecipe(req, res) {
+  try {
+    const { id } = req.body;
+    const singleRecipe = await prisma.recipe.findUnique({
+      where: { id },
+    });
+    res.status(200).send(singleRecipe);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+module.exports = { createRecipe, getAllRecipes, getSingleRecipe };

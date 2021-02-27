@@ -56,7 +56,6 @@ async function getAllRecipeImages(req, res) {
     });
 
     recipeImagesIds = images.map((image) => image.publicIds.substr(1));
-    console.log(recipeImagesIds);
     res.status(200).send(recipeImagesIds);
   } catch (error) {
     console.error(error);
