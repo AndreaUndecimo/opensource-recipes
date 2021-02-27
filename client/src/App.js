@@ -6,6 +6,7 @@ import AddRecipeSteps from "./Components/AddRecipeSteps/AddRecipeSteps";
 import AddBackgroundStory from "./Components/AddBackgroundStory/AddBackgroundStory";
 import AddPictures from "./Components/AddPictures/AddPictures";
 import AllRecipes from "./Components/AllRecipes/AllRecipes";
+import RecipeCard from "./Components/RecipeCard/RecipeCard";
 
 function App() {
   const [state, dispatch] = Store();
@@ -20,6 +21,7 @@ function App() {
           <AddBackgroundStory path="add_background" />
           <AddPictures path="add_images" />
           <AllRecipes path="all_recipes" />
+          <RecipeCard path="recipe/:id" />
         </Router>
       </div>
     </StateContext.Provider>
