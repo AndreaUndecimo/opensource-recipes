@@ -13,7 +13,8 @@ module.exports = {
       ref: "origin/master",
       repo: "git@github.com:AndreaUndecimo/opensource-recipes.git",
       path: "/home/ubuntu/opensource-recipes",
-      "post-deploy": "npm install && pm2 startOrRestart ecosystem.config.js",
+      "post-deploy":
+        "npm install && pm2 startOrRestart server/ecosystem.config.js",
     },
   },
 };
