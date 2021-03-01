@@ -1,8 +1,13 @@
 import React, { useContext, useState } from "react";
+import "./AddRecipeSteps.css";
 
 // services
 import { StateContext } from "../../globals/globalStore.reducer";
 import { validateRecipeSteps } from "../../helpers/validation.helper";
+import {
+  randomFoodEmojisArray,
+  getRandomEmoji,
+} from "../../helpers/randomEmojis";
 import { navigate } from "@reach/router";
 
 const AddRecipeSteps = () => {
@@ -20,16 +25,18 @@ const AddRecipeSteps = () => {
 
     if (e.target.value.match(/\b[\w]+\b/g)) {
       newSteps = e.target.value
-        .match(/\b[\w]+\b/g)
-        .filter((el) => /[^\s]/.test(el))
-        .join(",");
+        .split(/\r?\n/)
+        .map((el) => el.substr(3))
+        .join("|");
     }
     setSteps(newSteps);
   };
 
   const focusTextArea = () => {
-    if (document.getElementById("ingredients").value === "") {
-      document.getElementById("ingredients").value += "• ";
+    if (document.getElementById("steps").value === "") {
+      document.getElementById("steps").value += `${getRandomEmoji(
+        randomFoodEmojisArray
+      )} `;
     }
   };
 
@@ -37,12 +44,14 @@ const AddRecipeSteps = () => {
     let keycode = e.keyCode ? e.keyCode : e.which;
 
     if (keycode === 13) {
-      document.getElementById("ingredients").value += "• ";
+      document.getElementById("steps").value += `${getRandomEmoji(
+        randomFoodEmojisArray
+      )} `;
     }
 
-    var txtval = document.getElementById("ingredients").value;
+    var txtval = document.getElementById("steps").value;
     if (/\n+/.test(txtval.substr(txtval.length - 1))) {
-      document.getElementById("ingredients").value = txtval.substring(
+      document.getElementById("steps").value = txtval.substring(
         0,
         txtval.length - 1
       );
@@ -50,14 +59,14 @@ const AddRecipeSteps = () => {
   };
 
   return (
-    <div className="add_recipes_wrapper">
+    <div className="add_steps_wrapper">
       <div className="h1_wrapper">
-        <h1>Hey, here you'll add the recipe steps!</h1>
+        <h1 className="steps_title">Tell us the secret for deliciousnes!</h1>
+        <h3 className="steps_subtitle">
+          Add the steps required to make this recipe.
+        </h3>
       </div>
       <form className="form_recipe" onSubmit={(e) => submitRecipe(e)}>
-        <label htmlFor="ingredients">
-          Tell us the secret for deliciousnes!
-        </label>
         <textarea
           required={true}
           onKeyUp={(e) => addBullet(e)}
@@ -65,11 +74,15 @@ const AddRecipeSteps = () => {
           onChange={(e) => saveSteps(e)}
           className="ingredients"
           name="Ingredients"
-          id="ingredients"
+          id="steps"
           cols="30"
-          rows="30"
+          rows="20"
         ></textarea>
-        <button type="submit" disabled={validateRecipeSteps(steps)}>
+        <button
+          type="submit"
+          disabled={validateRecipeSteps(steps)}
+          id="steps_btn"
+        >
           That's it!
         </button>
       </form>

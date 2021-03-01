@@ -22,6 +22,7 @@ const AllRecipes = () => {
             key={recipe.id}
             onClick={() => navigate(`/recipe/${recipe.id}`)}
           >
+            <h1 style={{ marginBottom: "20px" }}>Recipe</h1>
             <h1>{recipe.title}</h1>
           </div>
         ))}

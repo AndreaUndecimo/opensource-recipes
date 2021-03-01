@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.recipe_card {
+div.recipe_card {
   width: 75%;
   min-height: 20%;
   padding: 10px;
@@ -19,4 +19,8 @@
   border-radius: 1rem;
   margin: 10px 0;
   font-size: 2rem;
+}
+
+div.recipe_card:hover {
+  background-color: #d4d2d5;
 }

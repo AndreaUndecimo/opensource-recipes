@@ -52,19 +52,13 @@ const AddPictures = () => {
       <div className="title">
         <h1>Upload an Image</h1>
       </div>
-      <Alert msg={errMsg} type="danger" />
-      <Alert msg={successMsg} type="success" />
       <form className="form_images" onSubmit={handleSubmitFile}>
         <ul className="image_grid">
           {selectedFile &&
             selectedFile.length <= 4 &&
             selectedFile.map((fileSrc) => (
               <li className="pics" key={fileSrc}>
-                <img
-                  src={fileSrc}
-                  alt="chosen"
-                  style={{ height: "250px", width: "100%" }}
-                />
+                <img src={fileSrc} alt="chosen" className="images_thumbs" />
               </li>
             ))}
           {selectedFile.length < 4 && (
@@ -83,9 +77,11 @@ const AddPictures = () => {
             </>
           )}
         </ul>
-        <button className="btn" type="submit">
-          Submit
-        </button>
+        <div className="submit_pic_btn">
+          <button className="btn" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

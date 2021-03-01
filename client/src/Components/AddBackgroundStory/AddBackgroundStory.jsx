@@ -4,6 +4,8 @@ import { StateContext } from "../../globals/globalStore.reducer";
 import { navigate } from "@reach/router";
 import { postOneRecipe } from "../../ApiServices/ApiClientService";
 
+import "./AddBackgroundStory.css";
+
 const AddBackgroundStory = () => {
   const { state, dispatch } = useContext(StateContext);
   const [story, setStory] = useState("");
@@ -30,10 +32,9 @@ const AddBackgroundStory = () => {
   };
 
   return (
-    <div className="add_recipes_wrapper">
+    <div className="add_background_wrapper">
       <div className="h1_wrapper">
         <h1>We would love to hear what is the story behind the recipe!</h1>
-        <h3>If you don't have any, don't worry, you can skip this passage</h3>
       </div>
       <form className="form_recipe" onSubmit={(e) => submitStory(e)}>
         <textarea
@@ -42,10 +43,15 @@ const AddBackgroundStory = () => {
           name="Ingredients"
           id="ingredients"
           cols="30"
-          rows="30"
+          rows="20"
         ></textarea>
-        <button type="submit">That's it!</button>
-        <button type="submit">Skip</button>
+        <div className="skip_text">
+          <h3>If you don't have any, don't worry, you can skip this passage</h3>
+        </div>
+        <div className="bg_story_btn">
+          <button type="submit">That's it!</button>
+          <button type="submit">Skip</button>
+        </div>
       </form>
     </div>
   );

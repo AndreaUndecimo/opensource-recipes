@@ -1,0 +1,81 @@
+.recipe_card_wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8dda4;
+}
+
+.recipe_display {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 8fr;
+  gap: 10px;
+}
+
+.recipe_display h3 {
+  padding: 10px 30px;
+  font-size: 1.3rem;
+}
+
+.recipe_display h1 {
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+}
+
+.credentials,
+.recipe_title {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+  justify-content: space-between;
+}
+
+.recipe_info {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  overflow: auto;
+}
+
+ul.ingredients_list {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+ul.steps_list {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.steps_list li,
+.ingredients_list li {
+  list-style: decimal;
+  font-size: 1.3rem;
+}
+
+.image_gallery {
+  padding: 0 20px;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  max-height: 500px;
+  width: 100%;
+}
+
+.img_recipe {
+  height: 100%;
+  justify-self: center;
+}
+
+div.background_story {
+  margin-top: 15px;
+}
+
+p {
+  font-weight: 600;
+}

@@ -1,31 +1,45 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useLayoutEffect, useRef, useState } from "react";
 import "./AddRecipeTitle.css";
 
 // services
 import { StateContext } from "../../globals/globalStore.reducer";
 import { validateRecipeTitle } from "../../helpers/validation.helper";
+import {
+  randomFoodEmojisArray,
+  getRandomEmoji,
+} from "../../helpers/randomEmojis";
 import { navigate } from "@reach/router";
 
 const AddRecipeTitle = () => {
   const { dispatch } = useContext(StateContext);
   const [ingredients, setIngredients] = useState([]);
+  const [wrapperwidth, setWrapperwidth] = useState(0);
   const [title, setTitle] = useState("");
+
+  const wrapperRef = useRef(null);
+
+  useLayoutEffect(() => {
+    setWrapperwidth(wrapperRef.current.offsetWidth);
+    console.log(wrapperRef.current.offsetWidth);
+  }, []);
 
   const saveIngredients = (e) => {
     let newIngredients;
 
     if (e.target.value.match(/\b[\w]+\b/g)) {
       newIngredients = e.target.value
-        .match(/\b[\w]+\b/g)
-        .filter((el) => /[^\s]/.test(el))
-        .join(",");
+        .split(/\r?\n/)
+        .map((el) => el.substr(3))
+        .join("|");
     }
     setIngredients(newIngredients);
   };
 
   const focusTextArea = () => {
     if (document.getElementById("ingredients").value === "") {
-      document.getElementById("ingredients").value += "• ";
+      document.getElementById("ingredients").value += `${getRandomEmoji(
+        randomFoodEmojisArray
+      )} `;
     }
   };
 
@@ -33,7 +47,9 @@ const AddRecipeTitle = () => {
     let keycode = e.keyCode ? e.keyCode : e.which;
 
     if (keycode === 13) {
-      document.getElementById("ingredients").value += "• ";
+      document.getElementById("ingredients").value += `${getRandomEmoji(
+        randomFoodEmojisArray
+      )} `;
     }
 
     var txtval = document.getElementById("ingredients").value;
@@ -53,9 +69,9 @@ const AddRecipeTitle = () => {
   };
 
   return (
-    <div className="add_recipes_wrapper">
+    <div className="add_recipes_wrapper" ref={wrapperRef}>
       <div className="h1_wrapper">
-        <h1>Hey, here you'll add the recipes!</h1>
+        <h1>Add the recipe title and the ingredients here.</h1>
       </div>
       <form className="form_recipe" onSubmit={(e) => submitRecipe(e)}>
         <label htmlFor="recipe_title">What is the title of your recipe?</label>
@@ -77,7 +93,7 @@ const AddRecipeTitle = () => {
           name="Ingredients"
           id="ingredients"
           cols="30"
-          rows="30"
+          rows="15"
         ></textarea>
         <button
           type="submit"

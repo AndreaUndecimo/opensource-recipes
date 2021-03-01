@@ -1,0 +1,36 @@
+.add_background_wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  background-color: #ec7357;
+}
+
+.skip_text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.bg_story_btn {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.bg_story_btn button {
+  background-color: #3f88c5;
+  color: white;
+}
+.bg_story_btn button:hover {
+  background-color: #032b43;
+}
+
+@media screen and (min-width: 961px) {
+  .add_background_wrapper {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    column-gap: 10%;
+  }
+}

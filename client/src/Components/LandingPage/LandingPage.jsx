@@ -13,24 +13,27 @@ const LandingPage = () => {
       </div>
       <div className="explanation">
         <h3>The rules are simple: </h3>
-        <ul>
-          <li>✍️ Add your recipe title</li>
-          <li>🧑‍🍳 Add the ingredients and the steps</li>
-          <li>📸 Add some pictures if you want to</li>
-          <li>📜 If you feel like, add a background story to the recipe</li>
+        <ul className="rules_list">
+          <li>✨ Add your recipe title. Make it unique!</li>
+          <li>
+            🧑‍🍳 Add the ingredients and the steps to prepare your favourite
+            dish!
+          </li>
+          <li>📜 You can add the story behind the recipe, if you want to.</li>
+          <li>
+            📸 And finally some pictures to help others recreate your
+            deliciousness!
+          </li>
         </ul>
-      </div>
-      <div className="get_started">
-        <div className="get_started_title">
-          <h3>Time to get started!</h3>
-        </div>
-        <div className="get_started_btn">
-          <Link to="/add_title">
-            <button>Add recipe</button>
-          </Link>
-          <Link to="/all_recipes">
-            <button>Browse recipe</button>
-          </Link>
+        <div className="get_started">
+          <div className="get_started_btn">
+            <Link to="/add_title">
+              <button>Add recipe</button>
+            </Link>
+            <Link to="/all_recipes">
+              <button>Browse recipe</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

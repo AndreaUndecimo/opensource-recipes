@@ -2,14 +2,25 @@
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 100%;
+  background-color: #d4d700;
 }
 
 .title_wrapper {
   text-align: center;
   margin-top: 30px;
+  font-size: 2rem;
+}
+
+.rules_list {
+  text-align: justify;
   font-size: 1rem;
+  font-weight: 600;
+}
+
+.rules_list li {
+  margin: 10px 0;
 }
 
 .explanation {
@@ -17,10 +28,16 @@
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  font-size: 1.4rem;
+}
+
+.explanation h3 {
+  margin-bottom: 15px;
 }
 
 .get_started {
   text-align: center;
+  margin-top: 10px;
 }
 
 .get_started_title {
@@ -33,9 +50,48 @@
 }
 
 .get_started_btn button {
-  box-shadow: 0 0 10px #3333;
   padding: 10px;
   border-radius: 0.75rem;
-  background-color: rgba(245, 47, 87, 0.8);
+  background-color: #f52f57;
   font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+.get_started_btn button:hover {
+  background-color: #ea0b38;
+}
+
+@media screen and (min-width: 720px) {
+  .landing_wrapper {
+    display: grid;
+    height: 100%;
+    background-color: #d4d700;
+    grid-template-columns: repeat(2, auto);
+  }
+
+  .title_wrapper {
+    font-size: 3.4rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+
+  .explanation {
+    font-size: 1.7rem;
+    justify-content: flex-end;
+    padding-left: 30px;
+  }
+
+  .explanation h3 {
+    margin-bottom: 40px;
+  }
+
+  .rules_list {
+    margin-bottom: 40px;
+  }
+
+  .rules_list li {
+    font-size: 1.5rem;
+  }
 }

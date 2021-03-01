@@ -1,0 +1,41 @@
+.add_steps_wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  background-color: #7e007b;
+}
+
+.steps_title {
+  color: white;
+}
+
+#steps_btn {
+  padding: 10px;
+  border-radius: 0.75rem;
+  background-color: #fcffeb;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+#steps {
+  color: white;
+}
+@media screen and (min-width: 961px) {
+  .add_steps_wrapper {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    column-gap: 10%;
+  }
+
+  #steps {
+    max-height: 70vh;
+    font-size: 1.7rem;
+  }
+  .steps_subtitle {
+    font-size: 2.5rem;
+  }
+}
