@@ -2,7 +2,8 @@ module.exports = {
   apps: [
     {
       name: "Open Recipes",
-      script: "./index.js",
+      script: "npm",
+      args: "start",
     },
   ],
   deploy: {
