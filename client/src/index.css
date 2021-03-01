@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
 
 * {
   margin: 0;
@@ -10,20 +12,28 @@
 
 ol,
 ul {
-  list-style: inside;
+  list-style: none;
 }
 
 html,
 body {
   height: 100%;
-  font-family: "Nunito", sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+h1,
+h2 {
+  font-family: "Raleway", sans-serif;
 }
 
 button {
   background: none;
-  border: none;
   outline: none;
   cursor: pointer;
+}
+
+button:focus {
+  border: 2px dotted #333;
 }
 
 textarea,
@@ -32,6 +42,8 @@ input {
   border: none;
   outline: none;
   cursor: text;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
 }
 
 .router {
